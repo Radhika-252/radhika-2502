@@ -1,2 +1,1 @@
-let collegeName="Vaagdevi College Engg";
-console.log(collegeName.repeat(3));
+console.log("welcome to javascript")
