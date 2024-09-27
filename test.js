@@ -1,1 +1,2 @@
-console.log("welcome to nodejs")
+let collegeName="Vaagdevi College Engg";
+console.log(collegeName.repeat(3));
