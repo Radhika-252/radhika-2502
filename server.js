@@ -1,22 +1,23 @@
-const express=require('express');
+const express=require('express')
+const MongoClient=require('mongoose')
+const dotEnv=require('dotenv')
+const bodyParser=require('body-parser')
+const EmployeeRoute=require('./routes/EmployeeRoute')
 const app=express();
+app.use(bodyParser.json());
+dotEnv.config();
 
-app.get("/getUser",(req,res)=>{
-  res.send("Welcome to getUser endpoint");
+const PORT=process.env.PORT || 5588;
+MongoClient.connect(process.env.MONGO_URI)
+.then(()=>{
+    console.log("MongoDB connection is success")
 })
-app.get("/getUser1",(req,res)=>{
-    res.send("Welcome to getUser1 endpoint");
-  })
-app.post("/getUser2",(req,res)=>{
-    res.send("Welcome to post method");
-})
-app.put("/getUser3",(req,res)=>{
-    res.send("Welcome to put method");
-})
-app.delete("/getUser4",(req,res)=>{
-    res.send("Welcome to Delete method");
+.catch((error)=>{
+    console.log(error);
 })
 
-app.listen(5500,()=>{
-    console.log("My server is on port 5500");
+app.use("/employees",EmployeeRoute);
+
+app.listen(PORT,()=>{
+    console.log(`My Server is running on ${PORT} number`)
 })
